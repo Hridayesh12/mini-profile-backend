@@ -12,7 +12,7 @@ const signup_post = asyncHandler(async (req, res) => {
 });
 const login_post = asyncHandler(async (req, res) => {
     try {
-        console.logq(req.body);
+        console.log(req.body);
         const user = await User.login(req.body);
         res.status(200).json({ user: user._id });
     }
