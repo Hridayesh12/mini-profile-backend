@@ -27,9 +27,7 @@ const signup_post = asyncHandler(async (req, res) => {
 const login_post = asyncHandler(async (req, res) => {
     try {
         const user = await User.login(req.body);
-        console.log(user._id);
         const token = createToken(user._id);
-        res.cookie('jwt', { jwt: token, httpOnly: true, maxAge: process.env.TOKEN_VALIDITY });
         res.status(200).json({ user: user._id });
     }
     catch (error) {
