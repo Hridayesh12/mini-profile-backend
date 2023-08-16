@@ -12,8 +12,8 @@ const signup_post = asyncHandler(async (req, res) => {
 });
 const login_post = asyncHandler(async (req, res) => {
     try {
+        console.logq(req.body);
         const user = await User.login(req.body);
-        const token = createToken(user._id);
         res.status(200).json({ user: user._id });
     }
     catch (error) {
