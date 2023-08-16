@@ -4,19 +4,19 @@ const { createToken } = require('../services/auth.js');
 const jwt = require('jsonwebtoken');
 const user_data = async (req, res) => {
     try {
-        // console.log(req.cookies);
+        console.log(req.cookies);
         let auth_token = req.cookies.jwt.jwt;
         const token = auth_token;
         const response = jwt.verify(token, process.env.SECRET_KEY);
         res.json(response);
     }
     catch (error) {
-        // console.log(error)
+        console.log(error)
     }
 }
 const signup_post = asyncHandler(async (req, res) => {
     try {
-        // console.log(req.body);
+        console.log(req.body);
         const user = await User.create(req.body);
         res.status(200).json({ user: user._id });
     }
@@ -27,9 +27,9 @@ const signup_post = asyncHandler(async (req, res) => {
 const login_post = asyncHandler(async (req, res) => {
     try {
         const user = await User.login(req.body);
-        // console.log(user._id);
+        console.log(user._id);
         const token = createToken(user._id);
-        // console.log(token);
+        console.log(token);
         res.cookie('jwt', { jwt: token, httpOnly: true, maxAge: process.env.TOKEN_VALIDITY });
         res.status(200).json({ user: user._id });
     }
