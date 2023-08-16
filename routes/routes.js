@@ -1,0 +1,15 @@
+const { Router } = require('express');
+const authController = require('../controllers/authController');
+const userController = require('../controllers/userController');
+const connectionController = require('../controllers/connectionController');
+const authUser = require('../middlewares/auhMiddleware');
+const router = Router();
+router.post('/login', authController.login_post);
+router.post('/signup', authController.signup_post);
+router.get('/user_data', authController.user_data);
+router.get('/logout', authController.logout);
+router.get('/user_info/:id', userController.user_info);
+router.put('/user_update/:id', userController.update_user);
+router.post('/connections', connectionController.get_connections);
+router.post('/remaining_connections', connectionController.findUsersNotConnected);
+module.exports = router;
