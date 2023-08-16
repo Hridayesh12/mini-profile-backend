@@ -1,19 +1,5 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel.js');
-const { createToken } = require('../services/auth.js');
-const jwt = require('jsonwebtoken');
-const user_data = async (req, res) => {
-    try {
-        console.log(req.cookies);
-        let auth_token = req.cookies?.jwt?.jwt;
-        const token = auth_token;
-        const response = jwt.verify(token, process.env.SECRET_KEY);
-        res.json(response);
-    }
-    catch (error) {
-        console.log(error)
-    }
-}
 const signup_post = asyncHandler(async (req, res) => {
     try {
         console.log(req.body);
@@ -36,10 +22,9 @@ const login_post = asyncHandler(async (req, res) => {
 });
 const logout = (req, res) => {
     try {
-        res.cookie('jwt', '', { maxAge: 1 });
         res.json({ success: 'User logged out' });
     } catch (error) {
         res.json({ error: 'Failed to logout' });
     }
 };
-module.exports = { user_data, signup_post, login_post, logout };
+module.exports = { signup_post, login_post, logout };
